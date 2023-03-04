@@ -1,16 +1,17 @@
 
-const loadAllData = () => {
-  fetch("https://openapi.programming-hero.com/api/ai/tools")
-    .then((res) => res.json())
-    .then((file) => displayCard(file.data.tools))
+  const loadAllData = () => {
+    fetch('https://openapi.programming-hero.com/api/ai/tools')
+    .then(res => res.json())
+    .then(data => {
+        displayCard(data.data.tools.slice(0, 6))
     
-    };
-
-const displayCard = (tools) =>{
+    })
+}
+const displayCard = (Alltools) =>{
   //console.log(tools)
   const cardDisplay = document.getElementById('card6')
   cardDisplay.innerText ='';
- tools.forEach(tool => {
+ Alltools.forEach(tool => {
   //console.log(tool)
   const cardDiv = document.createElement('div')
   cardDiv.classList.add('col');
@@ -43,7 +44,7 @@ const displayCard = (tools) =>{
                 <div>
                     <h2 class="card-title">${tool.name}</h2>
                     <p class="flex">
-                  
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"> <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z"/></svg>
                         ${tool.published_in}</p>
                         
               
@@ -130,6 +131,15 @@ ${id.integrations ? id.integrations.map(data => (`<li>${data}</li>`)).join("") :
 
 }
 
+document.getElementById('btn-show').addEventListener('click', function(){
+  progressBar(true)
+  fetch('https://openapi.programming-hero.com/api/ai/tools')
+  .then(res => res.json())
+  .then(data => displayCard(data.data.tools))
+  document.getElementById('btn-show').classList.add('hidden')
+
+})
+
 
 const sortData = () => {
   fetch('https://openapi.programming-hero.com/api/ai/tools')
@@ -149,56 +159,25 @@ const sortData = () => {
         return 0;
         });
         
-        console.log(data);
+       
         displayCard(data.data.tools);
     
-        // document.getElementById('s').classList.add('hidden');
+        document.getElementById('s').classList.add('hidden');
 })
 
 }
 
 
 
+function progressBar(isLoading){
+  const progress = document.getElementById('progress');
+  if(isLoading){
+      progress.classList.remove('hidden');
+  }
+  else{
+      progress.classList.add('hidden');
+  };
+};
+
 
 loadAllData();
-
-{/* <li>${tool.features[0]}</li>
-<li>${tool.features[1]}</li>
-<li>${tool.features[2]}</li>
-<li>${tool?.features[3]}</li> 
-
- <h2 class="card-title">${tool.name}</h2>
-     <p class="flex"> <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-  <path d="M5.25 12a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H6a.75.75 0 01-.75-.75V12zM6 13.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V14a.75.75 0 00-.75-.75H6zM7.25 12a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H8a.75.75 0 01-.75-.75V12zM8 13.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V14a.75.75 0 00-.75-.75H8zM9.25 10a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H10a.75.75 0 01-.75-.75V10zM10 11.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V12a.75.75 0 00-.75-.75H10zM9.25 14a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H10a.75.75 0 01-.75-.75V14zM12 9.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V10a.75.75 0 00-.75-.75H12zM11.25 12a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H12a.75.75 0 01-.75-.75V12zM12 13.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V14a.75.75 0 00-.75-.75H12zM13.25 10a.75.75 0 01.75-.75h.01a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75H14a.75.75 0 01-.75-.75V10zM14 11.25a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 00.75-.75V12a.75.75 0 00-.75-.75H14z" />
-  <path fillRule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clipRule="evenodd" />
-</svg>
- ${tool.published_in}</p>
-  <label  for="my-modal-5"><svg viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-          <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd" />
-        </svg></label>
-
-  <div>
-  <label  for="my-modal-5"><i class="fa-solid fa-arrow-right"></i></label>
-  </div>
-</div>
-<div class="card-actions justify-start">
-  
-</div>
-</div>
-
-
-<label onclick="loadModalData('${tool.id}')" for="my-modal-5"><i class="fa-solid fa-arrow-right"></i></label>
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/}

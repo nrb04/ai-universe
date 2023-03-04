@@ -17,23 +17,15 @@
 
   <title>ai universe</title>
 </head>
-<body>
-<div id="preload"><div class=" flex items-center hidden">
-  <strong></strong>
-  <div
-    class="ml-auto inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-    role="status"></div>
-
-  </div>
-</div>
-
+<body onload="progressBar(true)" class="w-[95%] mx-auto">
+ 
 
 
     <div class="mx-auto my-10 text-center text-5xl font-extrabold">
         AI-Universe-Hub
         
-        <div  class=" bg-red-50 text-center m-6">
-          <button onclick="sortData()" class="btn btn-accent">Sort by Date</button>
+        <div  class="  text-center m-6">
+          <button onclick="sortData()" class="bg-red-400 btn btn-accent">Sort by Date</button>
       </div>
       </div>
     
@@ -41,7 +33,7 @@
 
   
   <div class="cardDiv " >
-    <div id="card6" class="container md:box-content grid gap-4  md:grid-cols-3 justify-center mx-10">
+    <div id="card6" class="container  grid gap-4  md:grid-cols-3 justify-center mx-10">
       
       </div>
   </div>
@@ -104,6 +96,14 @@
     </button>
   </div> -->
 
+<!-- progress -->
+<div id="progress" class="mt-8 mb-8 text-center hidden">
+  <progress class="progress w-56"></progress>
+</div>
+<!-- Show More Button -->
+<div id="btn-show" class="text-center m-4">
+  <button class="btn bg-red-500">Show More</button>
+</div>
 
  
 
