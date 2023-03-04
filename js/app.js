@@ -5,10 +5,18 @@ const loadData = () => {
     .then((file) => displayCard(file.data.tools))
     
     };
+
 const displayCard = tools =>{
   //console.log(tools)
   const cardDisplay = document.getElementById('card6')
 
+
+
+
+
+
+  
+  
  tools.forEach(tool => {
   //console.log(tool)
   const cardDiv = document.createElement('div')
@@ -29,7 +37,7 @@ const displayCard = tools =>{
             <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
             
               <ol class="list-decimal">
-             ${tool.features.map ((fdata) => "<li>" + fdata +". </li>").join("")}
+             ${tool.features.map ((fdata) => "<li>" + fdata +". </li>") }
                </ol>
             </p>
 
@@ -67,9 +75,12 @@ const displayCard = tools =>{
   
   `
   cardDisplay.appendChild(cardDiv); 
+
+
  });
  
 }
+
 
 const loadModalData = (id) => {
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
